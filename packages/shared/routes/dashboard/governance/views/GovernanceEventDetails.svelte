@@ -3,17 +3,12 @@
     import { localize } from 'shared/lib/i18n'
     import { canParticipate } from 'shared/lib/participation'
     import { participationOverview } from 'shared/lib/participation/stores'
-    import {
-        ParticipationEvent,
-        ParticipationEventState,
-        VotingEventAnswer,
-        VotingEventQuestion,
-    } from 'shared/lib/participation/types'
+    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { governanceRoute } from 'shared/lib/router'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { handleTransactionEventData, selectedAccount, transferState } from 'shared/lib/wallet'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
     import { AccountColors } from 'shared/lib/wallet'
     import { calculateVotesByTrackedParticipation } from 'shared/lib/participation/governance'

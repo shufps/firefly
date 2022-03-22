@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { icons } from './icons'
 
-    export let icon = undefined
-    export let width = undefined
-    export let height = undefined
+    export let icon: string
+    export let width: string
+    export let height: string
     export let classes = ''
     export let inlineStyle = ''
     export let boxed = false

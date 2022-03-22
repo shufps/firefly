@@ -1,4 +1,4 @@
-import type { TrackedParticipation } from './types'
+import { TrackedParticipation } from './types'
 import { get } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 
@@ -17,7 +17,7 @@ import { networkStatus } from '../networkStatus'
 export const calculateVotesByMilestones = (
     startMilestoneIndex: number,
     endMilestoneIndex: number,
-    amount: number,
+    amount: number
 ): number => {
     const _endMilestoneIndex = endMilestoneIndex || get(networkStatus)?.currentMilestone
     return amount * 0.001 * (_endMilestoneIndex - startMilestoneIndex)

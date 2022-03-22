@@ -1,31 +1,40 @@
 <script lang="typescript">
-    import { Text, Button, Illustration } from 'shared/components'
+    import { Text, Button, Illustration, Link } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { GovernanceRoutes, SettingsRoutes } from 'shared/lib/typings/routes'
     import { governanceRoute, settingsRoute } from 'shared/lib/router'
-    import type { ParticipationEvent } from 'shared/lib/participation/types'
+    import { ParticipationEvent } from 'shared/lib/participation/types'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { NetworkConfig, NetworkType } from 'shared/lib/typings/network'
-    import { getOfficialNetworkConfig, updateClientOptions } from 'shared/lib/network'
+    import {
+        getOfficialNetworkConfig,
+        updateClientOptions,
+        getNetworkWithPrimaryOfficialNode,
+        isOfficialNode,
+    } from 'shared/lib/network'
     import { openSettings } from 'shared/lib/router'
 
     export let event: ParticipationEvent
 
-    const networkConfig: NetworkConfig =
-        $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
+    let networkConfig: NetworkConfig
+
+    $: networkConfig = $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
 
     $: {
         updateClientOptions(networkConfig)
         updateProfile('settings.networkConfig', networkConfig)
     }
 
-    const handleViewProposalClick = () => governanceRoute.set(GovernanceRoutes.EventDetails)
+    const handleViewProposalClick = (): void => governanceRoute.set(GovernanceRoutes.EventDetails)
 
-    const handleConnectDefaultNodeClick = () => {
-        networkConfig.automaticNodeSelection = true
+    const handleConnectDefaultNodeClick = (): void => {
+        const networkType = $activeProfile.isDeveloperProfile
+            ? NetworkType.ChrysalisDevnet
+            : NetworkType.ChrysalisMainnet
+        networkConfig = getNetworkWithPrimaryOfficialNode(networkConfig, networkType)
     }
 
-    const handleViewNodeSettingsClick = () => {
+    const handleViewNodeSettingsClick = (): void => {
         openSettings()
         settingsRoute.set(SettingsRoutes.AdvancedSettings)
     }
@@ -64,17 +73,17 @@
                 >{localize('views.governance.events.treasury.notFound.subtitle')}</Text
             >
         </div>
-        {#if !networkConfig.automaticNodeSelection}
+        {#if isOfficialNode(networkConfig?.nodes?.find((node) => node.isPrimary)?.url)}
             <Button onClick={handleConnectDefaultNodeClick} classes="mb-2">
                 <Text type="h5" bold classes="text-white px-4" overrideColor
                     >{localize('views.governance.events.treasury.notFound.buttonConnect')}
                 </Text>
             </Button>
         {/if}
-        <Button secondary onClick={handleViewNodeSettingsClick} classes="border-transparent">
+        <Link onClick={handleViewNodeSettingsClick} classes="mt-2">
             <Text type="h5" bold classes="text-blue-500 dark:text-white" overrideColor>
                 {localize('views.governance.events.treasury.notFound.buttonSettings')}
             </Text>
-        </Button>
+        </Link>
     </div>
 {/if}
