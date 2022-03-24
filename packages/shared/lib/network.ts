@@ -1,5 +1,5 @@
 import { Node, NodeAuth } from './typings/node'
-import { isValidHttpsUrl, isValidUrl } from './utils'
+import { isValidHttpsUrl, isValidUrl, pick } from './utils'
 import { Network, NetworkConfig, NetworkId } from './typings/network'
 import { NetworkType } from './typings/network'
 import { api, wallet } from './wallet'
@@ -138,6 +138,23 @@ export const isOfficialNetwork = (type: NetworkType): boolean => {
 }
 
 /**
+ * Determines whether the type of a given node url is "official", meaning
+ * the IOTA Foundation hosts nodes publicly with that url.
+ *
+ * @method isOfficialNode
+ *
+ * @param {string} nodeUrl
+ *
+ * @returns {boolean}
+ */
+export const isOfficialNode = (nodeUrl: string): boolean => {
+    const officialNodeUrls = getOfficialNodeUrls(NetworkType.ChrysalisMainnet).concat(
+        getOfficialNodeUrls(NetworkType.ChrysalisDevnet)
+    )
+    return officialNodeUrls.some((officialNodeUrl) => officialNodeUrl === nodeUrl)
+}
+
+/**
  * Find a network by its associated ID.
  *
  * @method getNetworkById
@@ -244,7 +261,7 @@ export const checkNodeUrlValidity = (nodesList: Node[], newUrl: string, allowIns
      * be audited. Until then this assignment statement
      * must stay.
      */
-    allowInsecure = false
+    allowInsecure = true
     if (!allowInsecure && !isValidHttpsUrl(newUrl)) {
         return 'error.node.https'
     }
@@ -393,4 +410,36 @@ export const ensureSinglePrimaryNode = (nodes: Node[]): Node[] => {
 const setRandomPrimaryNode = (nodes: Node[]): Node[] => {
     const randIdx = Math.floor(Math.random() * nodes.length)
     return nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
+}
+
+/**
+ * Returns the parametrized NetworkConfig with an official node as primary
+ *
+ * @method getNetworkWithPrimaryOfficialNode
+ *
+ * @param {NetworkConfig} networkConfig
+ * @param {NetworkType} networkType
+ *
+ * @returns {Node[]}
+ */
+export const getNetworkWithPrimaryOfficialNode = (
+    networkConfig: NetworkConfig,
+    networkType: NetworkType
+): NetworkConfig => {
+    const { nodes } = networkConfig
+    if (!nodes || !nodes.length) return networkConfig
+
+    const randomOfficialNode = pick(getOfficialNodes(networkType))
+
+    let _nodes: Node[] = nodes.map((node) => ({ ...node, isPrimary: false }))
+
+    if (nodes.some((node) => node.url === randomOfficialNode.url)) {
+        _nodes = _nodes.map((node) => (node.url === randomOfficialNode.url ? { ...node, isPrimary: true } : node))
+    } else {
+        _nodes = [..._nodes, { ...randomOfficialNode, isPrimary: true }]
+    }
+
+    const _networkConfig = { ...networkConfig, includeOfficialNodes: true, nodes: ensureSinglePrimaryNode(_nodes) }
+
+    return _networkConfig
 }
