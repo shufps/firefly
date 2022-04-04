@@ -74,7 +74,7 @@ export interface IWalletApi {
     )
     syncAccount(
         accountId: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: Event<SyncedAccount>) => void; onError: (err: ErrorEventPayload) => void }
     )
     startBackgroundSync(
         pollingInterval: Duration,

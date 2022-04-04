@@ -25,10 +25,9 @@
     import {
         addMessagesPair,
         api,
-        asyncSyncAccounts,
+        asyncSyncAccount,
         getAccountMessages,
         getAccountMeta,
-        getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
         isTransferring,
@@ -98,10 +97,8 @@
                 const _continue = async () => {
                     accountsLoaded.set(true)
 
-                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
-
                     try {
-                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+                        await asyncSyncAccount($selectedAccount)
 
                         if ($isFirstSessionSync) isFirstSessionSync.set(false)
                     } catch (err) {

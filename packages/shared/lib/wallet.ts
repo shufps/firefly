@@ -518,6 +518,24 @@ export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =
         })
     })
 
+export const asyncSyncAccount = (account: WalletAccount): Promise<void> =>
+    new Promise((resolve, reject) => {
+        const updateAccount = (_account: WalletAccount) =>
+            get(wallet)?.accounts.update((_accounts) => _accounts.map((a) => (a.id === _account.id ? _account : a)))
+        updateAccount({ ...account, isSyncing: true })
+
+        api.syncAccount(account.id, {
+            onSuccess(response) {
+                updateAccounts([response.payload])
+                resolve()
+            },
+            onError(err) {
+                updateAccount({ ...account, isSyncing: false })
+                reject(err)
+            },
+        })
+    })
+
 export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> => {
     if (!url || (!url && !auth)) {
         const node = get(activeProfile)?.settings?.networkConfig?.nodes.find((n) => n.isPrimary)
@@ -800,7 +818,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
             }
         }
 
-        return storedAccount
+        return { ...storedAccount, isSyncing: false }
     })
 
     if (newAccounts.length) {

@@ -18,6 +18,7 @@ export interface WalletAccount extends Account {
     balance: string
     balanceEquiv: string
     color: string
+    isSyncing?: boolean
 }
 
 export interface AccountMessage extends Message {
