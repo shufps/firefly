@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, DashboardPane, Icon, Text } from 'shared/components'
+    import { Button, DashboardPane, Icon, Text, Modal, GovernanceInfoModal } from 'shared/components'
     import { localize } from '@core/i18n'
     import { governanceRouter } from '@core/router'
     import { GovernanceRoute } from '@core/router/enums'
@@ -21,6 +21,7 @@
 
     let transactionEventData: TransferProgressEventData = null
     let currentVoteValue: string
+    let modal: Modal
 
     $: $selectedAccountParticipationOverview, updateCurrentVoteValue()
     $: progress = getProgressByMilestone(event?.information?.milestoneIndexEnd)
@@ -65,7 +66,6 @@
             promptUserToConnectLedger(false, () => openGovernanceCastVotePopup(), undefined, true)
         }
     }
-
     function getAnswerHeader(castedAnswerValue: string, answerValue: string): string {
         if (isWinnerAnswer(answerValue)) {
             return localize('views.governance.eventDetails.answerHeader.winner')
@@ -77,26 +77,22 @@
             return `${localize('general.option')} ${answerValue}`
         }
     }
-
     function getProgressByMilestone(milestone: number) {
         const progress = milestoneToDate(milestone).getTime() - Date.now()
         return progress > 0 ? progress : 0
     }
-
     function setActiveText(): string {
         if (event?.status?.status === ParticipationEventState.Holding) {
             return localize('views.governance.eventDetails.answerHeader.activeVoting')
         }
         return localize('views.governance.eventDetails.answerHeader.selected')
     }
-
     function updateCurrentVoteValue(): void {
         const participation = $selectedAccountParticipationOverview?.participations?.find(
             (participation) => participation.eventId === event.eventId
         )
         currentVoteValue = participation?.answers[0] ?? null
     }
-
     function handleTransferState(state: TransferState): void {
         if (!state) {
             return
@@ -134,7 +130,6 @@
                 break
         }
     }
-
     function isWinnerAnswer(answerValue: string): boolean {
         if (event?.status?.status === ParticipationEventState.Ended) {
             const resultsAccumulated = results.map((result) => result?.accumulated)
@@ -165,7 +160,10 @@
                 bold
                 overrideColor>{localize(`views.governance.events.status.${event?.status?.status}`)}</Text
             >
-            <Icon icon="info-filled" classes="ml-2 text-gray-400" />
+            <button on:click={modal?.open}>
+                <Icon icon="info-filled" classes="ml-2 text-gray-400" />
+            </button>
+            <GovernanceInfoModal bind:modal {event} type="eventStatusTimeline" />
         </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
         <Text type="p" classes="mb-2" bold>{event?.information?.additionalInfo}</Text>

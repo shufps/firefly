@@ -45,7 +45,7 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
  */
 export const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
 
-export const TREASURY_VOTE_EVENT_ID = '16d2eb8aada8bff94d98bd0cb59b33e8e8fde97b09b4712876c4a80523e24d43'
+export const TREASURY_VOTE_EVENT_ID = '0e95b78f5f876bac5d715a237a1e84aa90528ac6c8c714163fddf8ba2e9249bb'
 
 /**
  * The GitHub URLs containing the end Assembly staking results per period.
