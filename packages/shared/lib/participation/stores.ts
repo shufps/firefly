@@ -12,7 +12,6 @@ import {
     ParticipationEvent,
     ParticipationEventState,
     ParticipationOverview,
-    ParticipationHistoryItem,
     PendingParticipation,
     StakingAirdrop,
 } from './types'
@@ -233,5 +232,3 @@ export const getPendingParticipation = (id: string): PendingParticipation | unde
  */
 export const hasPendingParticipation = (id: string): boolean =>
     get(pendingParticipations).some((participation) => participation.messageId === id)
-
-export const participationHistory = writable<ParticipationHistoryItem[]>([])

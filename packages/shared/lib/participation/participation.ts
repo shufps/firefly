@@ -2,18 +2,17 @@ import { WalletAccount } from '../typings/wallet'
 import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
 import { canAccountReachMinimumAirdrop } from './account'
 import { getParticipationOverview } from './api'
-import { ASSEMBLY_EVENT_ID, PARTICIPATION_POLL_DURATION } from './constants'
+import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, PARTICIPATION_POLL_DURATION } from './constants'
 import {
     isPerformingParticipation,
     participationAction,
     participationEvents,
     participationOverview,
     pendingParticipations,
-    participationHistory,
 } from './stores'
 import { AccountParticipationAbility, ParticipationAction, ParticipationEventState, StakingAirdrop } from './types'
 import { get } from 'svelte/store'
-import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
+import { activeProfile } from '@lib/profile'
 
 let participationPollInterval
 
@@ -110,7 +109,7 @@ export const getAccountParticipationAbility = (account: WalletAccount): AccountP
  * @returns {ParticipationAction}
  */
 export const getMessageParticipationAction = (messageId: string): ParticipationAction => {
-    const matchedHistoryItem = get(participationHistory)?.find((item) => item.messageId === messageId)
+    const matchedHistoryItem = get(activeProfile)?.participationHistory?.find((item) => item.messageId === messageId)
     if (matchedHistoryItem?.action) {
         return matchedHistoryItem.action
     }

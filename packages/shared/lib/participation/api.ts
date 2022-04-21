@@ -3,7 +3,7 @@ import { localize } from '@core/i18n'
 import { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
 import { api, saveNewMessage } from '../wallet'
-import { addNewPendingParticipation, participationEvents, participationOverview, participationHistory } from './stores'
+import { addNewPendingParticipation, participationEvents, participationOverview } from './stores'
 import {
     ParticipationAction,
     ParticipateResponsePayload,
@@ -12,6 +12,8 @@ import {
     ParticipationOverviewResponse,
     ParticipationHistoryItem,
 } from './types'
+import { activeProfile, updateProfile } from '@lib/profile'
+import { get } from 'svelte/store'
 
 export function getParticipationOverview(assemblyEventId: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
@@ -59,7 +61,7 @@ function updateParticipationHistoryFromPayload(
         action,
         eventId: eventIds[index],
     }))
-    participationHistory.update((_participationHistory) => [..._participationHistory, ...participationHistoryItems])
+    updateProfile('participationHistory', [...get(activeProfile)?.participationHistory, ...participationHistoryItems])
 }
 
 export function participate(
