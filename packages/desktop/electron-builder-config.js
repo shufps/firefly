@@ -57,7 +57,13 @@ const prodConfig = () => ({
             { x: 170, y: 250, type: 'file' },
         ],
     },
-    nsis: { oneClick: true, deleteAppDataOnUninstall: false, perMachine: true, include: './build/installer.nsh' },
+    nsis: {
+        oneClick: true,
+        deleteAppDataOnUninstall: false,
+        perMachine: true,
+        include: './build/installer.nsh',
+        debugLogging: true,
+    },
     win: {
         icon: './public/assets/icons/prod/icon1024x1024.png',
         publisherName: 'IOTA Stiftung',
@@ -116,6 +122,7 @@ const prereleaseNsisOptions = {
     nsis: {
         oneClick: false,
         allowToChangeInstallationDirectory: true,
+        debugLogging: true,
     },
 }
 
