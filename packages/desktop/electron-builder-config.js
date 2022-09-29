@@ -7,6 +7,14 @@ const APP_NAME = getAppName()
 const APP_ID = getAppId()
 const APP_PROTOCOL = getAppProtocol()
 
+/* Official NSIS special build with logging enabled */
+const CUSTOM_NSIS_BINARY = {
+    url: 'https://github.com/electron-userland/electron-builder-binaries/releases/download/nsis-3.0.4.2/nsis-3.0.4.2.7z',
+    version: '3.0.4.2',
+    checksum: 'o+YZsXHp8LNihhuk7JsCDhdIgx0MKKK+1b3sGD+4zX5djZULe4/4QMcAsfQ+0r+a8FnwBt7BVBHkIkJHjKQ0sg==',
+    debugLogging: true,
+}
+
 /**
  * If stage = 'prod' -> 'Firefly'
  * If stage = 'alpha' -> 'Firefly Alpha'
@@ -62,7 +70,7 @@ const prodConfig = () => ({
         deleteAppDataOnUninstall: false,
         perMachine: true,
         include: './build/installer.nsh',
-        debugLogging: true,
+        customNsisBinary: CUSTOM_NSIS_BINARY,
     },
     win: {
         icon: './public/assets/icons/prod/icon1024x1024.png',
@@ -122,7 +130,7 @@ const prereleaseNsisOptions = {
     nsis: {
         oneClick: false,
         allowToChangeInstallationDirectory: true,
-        debugLogging: true,
+        customNsisBinary: CUSTOM_NSIS_BINARY,
     },
 }
 
