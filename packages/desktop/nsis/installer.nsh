@@ -4,6 +4,7 @@
 !addplugindir /x86-ansi "build\x86-ansi"
 
 !macro customInstall
+    LogSet on
     SetRegView 64
     ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\X64" "Version"
     SetRegView 32
