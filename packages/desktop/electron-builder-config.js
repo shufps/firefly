@@ -43,7 +43,7 @@ const prodConfig = () => ({
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/@iota/wallet/target/*'],
-    appId: 'org.iota.firefly',
+    appId: APP_ID,
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
@@ -103,7 +103,7 @@ const prodConfig = () => ({
     publish: {
         provider: 'generic',
         url: 'https://dl.firefly.iota.org/',
-        publishAutoUpdate: true,
+        publishAutoUpdate: false,
         channel: 'latest',
     },
 })
