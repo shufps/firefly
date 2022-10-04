@@ -9,7 +9,7 @@ export const profileBackupRouter = writable<ProfileBackupRouter>(null)
 
 export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
     constructor() {
-        super(ProfileBackupRoute.BackupMnemonic, profileBackupRoute, get(onboardingRouter))
+        super(ProfileBackupRoute.ViewMnemonic, profileBackupRoute, get(onboardingRouter))
     }
 
     next(): void {
