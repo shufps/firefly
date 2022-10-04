@@ -26,7 +26,7 @@ export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
                 break
 
             case ProfileBackupRoute.VerifyMnemonic:
-                nextRoute = ProfileBackupRoute.BackupStronghold
+                this.parentRouter.next()
                 break
 
             case ProfileBackupRoute.BackupStronghold: {
