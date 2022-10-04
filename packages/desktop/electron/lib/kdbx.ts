@@ -1,12 +1,12 @@
-const argon2 = require('argon2')
-const kdbxweb = require('kdbxweb')
+import argon2 from 'argon2'
+import kdbxweb from 'kdbxweb'
 
 /**
  * Convert single character string to trit array
  * @param {string} char - Input character
  * @returns {array} Output trit array
  */
-const charToByte = (char) => '9ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(char.toUpperCase())
+export const charToByte = (char: string): number => '9ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(char.toUpperCase())
 
 /**
  * Bind kdbxweb and argon2
@@ -33,7 +33,7 @@ kdbxweb.CryptoEngine.argon2 = (password, salt, memory, iterations, length, paral
  *
  * @returns {string} seed
  */
-const importVault = async (buffer, password) => {
+export const importVault = async (buffer: Buffer, password: string): Promise<string> => {
     const credentials = new kdbxweb.Credentials(kdbxweb.ProtectedValue.fromString(password))
 
     const db = await kdbxweb.Kdbx.load(buffer, credentials)
@@ -59,7 +59,7 @@ const importVault = async (buffer, password) => {
  *
  * @returns {boolean}
  */
-const checkFormat = (buffer) => {
+export const checkFormat = (buffer: Buffer): boolean => {
     const signature = buffer.byteLength < 8 ? null : new Uint32Array(buffer, 0, 2)
 
     if (!signature || signature[0] !== kdbxweb.Consts.Signatures.FileMagic) {
@@ -76,10 +76,3 @@ const checkFormat = (buffer) => {
 
     return true
 }
-
-const kdbx = {
-    importVault,
-    checkFormat,
-}
-
-module.exports = kdbx

@@ -1,4 +1,4 @@
-export const menuState = {
+export const MENU_STATE = {
     enabled: true,
     canCreateNewProfile: false,
     strings: {
