@@ -2,13 +2,14 @@ import { IAccountState } from '@core/account'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
 import { OutputData, Transaction } from '@iota/wallet'
 import { IProcessedTransaction } from '../../interfaces'
+import { IOutputResponse, ITransactionPayload } from '@iota/types'
 
 export async function preprocessOutputsForAccount(account: IAccountState): Promise<IProcessedTransaction[]> {
     const outputs = await account.outputs()
 
     const transactions = await account.transactions()
     const transactionMap = getTransactionsMapFromList(transactions)
-    const incomingTransactions = await account.incomingTransactions()
+    const incomingTransactions = getMapFromList(await account.incomingTransactions())
 
     const groupedOutputs: { [key: string]: OutputData[] } = {}
     for (const output of outputs) {
@@ -36,6 +37,16 @@ function getTransactionsMapFromList(transactions: Transaction[]): { [transaction
     const transactionMap = {}
     for (const transaction of transactions) {
         transactionMap[transaction.transactionId] = true
+    }
+    return transactionMap
+}
+
+function getMapFromList(transactions: [string, [ITransactionPayload, IOutputResponse[]]][]): {
+    [transactionId: string]: [ITransactionPayload, IOutputResponse[]]
+} {
+    const transactionMap = {}
+    for (const transaction of transactions) {
+        transactionMap[transaction[0]] = transaction[1]
     }
     return transactionMap
 }
