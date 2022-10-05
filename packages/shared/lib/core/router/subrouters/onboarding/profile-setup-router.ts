@@ -25,7 +25,7 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                 if (setupType === ProfileSetupType.Claimed) {
                     nextRoute = ProfileSetupRoute.SetupClaimed
                 } else if (setupType === ProfileSetupType.New) {
-                    nextRoute = ProfileSetupRoute.SetupNew
+                    nextRoute = ProfileSetupRoute.EnterName
                 } else if (setupType === ProfileSetupType.Recovered) {
                     nextRoute = ProfileSetupRoute.SetupRecovered
                 }
