@@ -29,6 +29,7 @@ import { isLedgerProfile } from '@core/profile/utils'
 
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { cleanupOnboarding } from '@contexts/onboarding'
+import { pollMarketPrices } from '@core/market/actions'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
@@ -111,6 +112,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 _loginRouter.next()
                 resetLoginProgress()
             }, 500)
+            pollMarketPrices()
 
             void cleanupOnboarding()
         } else {
