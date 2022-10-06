@@ -69,7 +69,7 @@
             "title": "Hast du die notwendigen Ledger-Apps installiert?",
             "body1": "Bevor du fortfährst, musst du sowohl die {legacy} App als auch die neue IOTA App über Ledger Live installieren.",
             "body2": "Stelle sicher, dass deine Ledger-Firmware aktuell ist. Alle vorinstallierten Apps sollten auf ihre neuesten Versionen aktualisiert werden.",
-            "action": "Ja, ich habe beide Apps installiert"
+            "action": "Ja, ich habe die Apps installiert"
         },
         "password": {
             "title": "Passwort erstellen",

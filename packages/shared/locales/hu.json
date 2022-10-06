@@ -1385,7 +1385,7 @@
             "generateAddress": "Hiba történt a cím generálása közben.",
             "timeout": "A Ledger eszköze időtúllépés miatt nem elérhető.",
             "disconnected": "Megszakadt a kapcsolat a Ledger eszközével.",
-            "noStronghold": "Hardveres tárca profillal nem lehet a Stronghold-ot használni."
+            "noStronghold": "Hardver tárca profillal nem lehet a Stronghold-ot használni."
         },
         "popup": {
             "preventClose": "A felugró ablakot nem lehet bezárni."

@@ -509,7 +509,7 @@
             }
         },
         "staking": {
-            "welcome": "Välkommen till staking-instrumentpanelen!",
+            "welcome": "Välkommen till staking-översikten!",
             "status": {
                 "upcoming": "Event inte startat",
                 "commencing": "För-staking öppen",
@@ -1224,7 +1224,7 @@
         "myAssets": "Mina tillgångar",
         "option": "Alternativ",
         "total": "Totalt: {balance}",
-        "openExplorer": "Visa i utforskaren",
+        "openExplorer": "Visa i Explorer",
         "activityDetails": "Transaktionsdetaljer"
     },
     "dates": {

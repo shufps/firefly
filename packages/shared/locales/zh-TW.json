@@ -125,9 +125,9 @@
             "body": "您的錢包已備份至 Stronghold。"
         },
         "congratulations": {
-            "title": "Profile setup complete!",
+            "title": "檔案設置完成！",
             "fundsMigrated": "資金遷移完成",
-            "body": "Your new profile is ready to use.",
+            "body": "您的新版個人檔案已可使用。",
             "softwareMigratedBody": "您已成功將資金遷移到新網路",
             "fireflyLedgerBody": "您的 Ledgar 帳號已成功復原，現在可繼續使用。",
             "trinityLedgerBody": "您已經成功把 Ledger 遷移到新網路。",
@@ -964,7 +964,7 @@
         "restoreWalletDescription": "遷移至Chrysalis 或恢復一個既存錢包",
         "createWallet": "建立新錢包",
         "createWalletDescription": "創建一個運行在Chrysalis的新錢包",
-        "exploreWallet": "Explore wallet",
+        "exploreWallet": "瀏覽錢包",
         "savePassword": "儲存密碼",
         "useBiometric": "使用生物識別安全機制",
         "setupPin": "設置 PIN 碼",
@@ -1441,9 +1441,9 @@
             "bodyMinBalanceAirdrop": "這個錢包的 IOTA 代幣數量未達 {airdrop} 空投獎勵的最低門檻。"
         },
         "shimmerTokenFormatting": {
-            "title": "Shimmer unit update",
-            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
-            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
+            "title": "Shimmer單位更新",
+            "body1": "SMR 的單位已在治理決議後改變。Shimmer 代幣數量的呈現將伴隨 6 位小數；1 SMR = 1,000,000 glow.",
+            "body2": "您仍持有相同額度的SMR獎勵，Firefly僅只是更換成不同格式。"
         }
     },
     "exports": {

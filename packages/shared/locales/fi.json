@@ -252,7 +252,7 @@
             "title": "Varoitus",
             "body1": "Sinulla on varoja yhdessä tai useammassa käytetyssä osoitteessa.",
             "body2": "Suosittelemme, että suoritat automatisoidun prosessin suojaamaan ja siirtämään nämä varat turvallisesti.",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "Ei ole mahdollista taata, että varasi siirtyisivät turvallisesti mobiililaitteella. Suosittelemme, että käytät Fireflyn työpöytäsovellusta migraatioon.",
             "learn": "Lue lisää käytetyistä osoitteista"
         },
         "secureSpentAddresses": {

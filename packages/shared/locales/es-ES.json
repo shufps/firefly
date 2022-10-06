@@ -125,9 +125,9 @@
             "body": "Has realizado una copia de seguridad de tus carteras a un Stronghold."
         },
         "congratulations": {
-            "title": "Profile setup complete!",
+            "title": "¡Configuración del perfil completada!",
             "fundsMigrated": "Fondos migrados",
-            "body": "Your new profile is ready to use.",
+            "body": "Tu nuevo perfil está listo para usar.",
             "softwareMigratedBody": "Tus fondos han sido migrados con éxito a la nueva red",
             "fireflyLedgerBody": "Tu cuenta de Ledger se ha recuperado con éxito y ahora puedes continuar.",
             "trinityLedgerBody": "Has migrado con éxito tu Ledger a la nueva red.",
@@ -252,7 +252,7 @@
             "title": "Advertencia",
             "body1": "Tienes fondos en una o más direcciones gastadas.",
             "body2": "Te recomendamos que ejecutes un proceso automatizado para ayudar a proteger y transferir estos fondos de forma segura.",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "No es posible garantizar que sus fondos se migrarán de forma segura en móvil. Le recomendamos que utilice la aplicación de escritorio Firefly para migrar.",
             "learn": "Aprende sobre las direcciones gastadas"
         },
         "secureSpentAddresses": {
@@ -964,7 +964,7 @@
         "restoreWalletDescription": "Migrar a Chrysalis o restaurar una cartera existente",
         "createWallet": "Crear nueva cartera",
         "createWalletDescription": "Crear una nueva cartera en Chrysalis",
-        "exploreWallet": "Explore wallet",
+        "exploreWallet": "Explorar cartera",
         "savePassword": "Guardar contraseña",
         "useBiometric": "Usar seguridad biométrica",
         "setupPin": "Establecer código PIN",
