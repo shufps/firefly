@@ -1,9 +1,6 @@
-name: Build and Release Desktop
+name: Build Desktop (v1)
 
 on:
-    push:
-        tags:
-            - desktop-*
     workflow_dispatch:
         inputs:
             debugElectronBuilder:
